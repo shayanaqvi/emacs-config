@@ -1,3 +1,8 @@
+#+title: Config
+#+property: header-args :tangle config.el
+* Appearance
+** Fonts
+#+begin_src emacs-lisp
 (setq doom-font (font-spec :family "Cascadia Code" :size 15)
       doom-variable-pitch-font (font-spec :family "Fira Sans" :size 15))
 (after! doom-themes
@@ -6,37 +11,70 @@
 (custom-set-faces!
   '(font-lock-comment-face :slant italic)
   '(font-lock-keyword-face :slant italic))
-
+#+end_src
+** Default theme
+#+begin_src emacs-lisp
 (setq doom-theme 'poet-dark-monochrome)
-
+#+end_src
+** Line numbers
+#+begin_src emacs-lisp
 (setq display-line-numbers-type 'relative)
-
+#+end_src
+** Transparency
+#+begin_src emacs-lisp
 (set-frame-parameter (selected-frame) 'alpha '(95 . 90))
 (add-to-list 'default-frame-alist '(alpha . (95 . 90)))
-
+#+end_src
+* Org-mode
+** Default org directory
+#+begin_src emacs-lisp
 (setq org-directory "~/Documents/org")
-
+#+end_src
+** Hide emphasis markers
+#+begin_src emacs-lisp
 (setq org-hide-emphasis-markers t)
-
+#+end_src
+* Dired
+** Keybindings
+#+begin_src emacs-lisp
 (evil-define-key 'normal dired-mode-map
   (kbd "h") 'dired-up-directory
   (kbd "l") 'dired-find-file
   (kbd "c") 'dired-do-copy
   (kbd "r") 'dired-do-rename)
-
+#+end_src
+** Icons
+#+begin_src emacs-lisp
 (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
-
+#+end_src
+** Trash directory
+#+begin_src emacs-lisp
 (setq delete-by-moving-to-trash t
       trash-directory "~/.local/share/Trash/files/")
-
+#+end_src
+* Text Editing
+** Use variable-pitch-font
+#+begin_src emacs-lisp
 (add-hook 'text-mode-hook
            (lambda ()
             (variable-pitch-mode 1)))
-
+#+end_src
+* Keyboard shortcuts
+** Toggle line truncation
+#+begin_src emacs-lisp
 (global-set-key (kbd "C-c t") 'toggle-truncate-lines)
-
+#+end_src
+** Toggle company-mode in current buffer
+#+begin_src emacs-lisp
 (global-set-key (kbd "C-c c") 'company-mode)
-
+#+end_src
+** Toggle treemacs
+#+begin_src emacs-lisp
 (global-set-key (kbd "C-c d") 'treemacs)
-
+#+end_src
+* Hooks
+** after-save-hook
+*** org-babel-tangle
+#+begin_src emacs-lisp
 (add-hook 'after-save-hook 'org-babel-tangle)
+#+end_src
