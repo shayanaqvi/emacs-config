@@ -22,8 +22,8 @@
 #+end_src
 ** Transparency
 #+begin_src emacs-lisp
-(set-frame-parameter (selected-frame) 'alpha '(95 . 90))
-(add-to-list 'default-frame-alist '(alpha . (95 . 90)))
+(set-frame-parameter (selected-frame) 'alpha '(90 . 80))
+(add-to-list 'default-frame-alist '(alpha . (90 . 80)))
 #+end_src
 * Org-mode
 ** Default org directory
@@ -33,6 +33,14 @@
 ** Hide emphasis markers
 #+begin_src emacs-lisp
 (setq org-hide-emphasis-markers t)
+#+end_src
+** phscroll
+[[https://github.com/misohena/phscroll]]
+#+begin_src emacs-lisp
+(add-to-list 'load-path "/home/shayan/.doom.d/")
+(load "phscroll.el")
+(setq org-startup-truncated nil)
+(load "org-phscroll.el")
 #+end_src
 * Dired
 ** Keybindings
@@ -68,13 +76,34 @@
 #+begin_src emacs-lisp
 (global-set-key (kbd "C-c c") 'company-mode)
 #+end_src
-** Toggle treemacs
+** Toggle neotree
 #+begin_src emacs-lisp
-(global-set-key (kbd "C-c d") 'treemacs)
+(global-set-key (kbd "C-c d") '+neotree/open)
+#+end_src
+** Maximise buffer
+#+begin_src emacs-lisp
+(global-set-key (kbd "C-c f f") 'doom/window-maximize-buffer)
+#+end_src
+** Vertically maximise buffer
+#+begin_src emacs-lisp
+(global-set-key (kbd "C-c f v") 'doom/window-maximize-vertically)
+#+end_src
+** Horizontally maximise buffer
+#+begin_src emacs-lisp
+(global-set-key (kbd "C-c f h") 'doom/window-maximize-horizontally)
 #+end_src
 * Hooks
 ** after-save-hook
 *** org-babel-tangle
 #+begin_src emacs-lisp
 (add-hook 'after-save-hook 'org-babel-tangle)
+#+end_src
+** after-init-hook
+*** neotree
+#+begin_src emacs-lisp
+(add-hook 'after-init-hook 'neotree)
+#+end_src
+*** menu-bar-mode
+#+begin_src emacs-lisp
+(add-hook 'after-init-hook 'menu-bar-mode)
 #+end_src

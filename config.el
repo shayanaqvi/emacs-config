@@ -11,12 +11,17 @@
 
 (setq display-line-numbers-type 'relative)
 
-(set-frame-parameter (selected-frame) 'alpha '(95 . 90))
-(add-to-list 'default-frame-alist '(alpha . (95 . 90)))
+(set-frame-parameter (selected-frame) 'alpha '(90 . 80))
+(add-to-list 'default-frame-alist '(alpha . (90 . 80)))
 
 (setq org-directory "~/Documents/org")
 
 (setq org-hide-emphasis-markers t)
+
+(add-to-list 'load-path "/home/shayan/.doom.d/")
+(load "phscroll.el")
+(setq org-startup-truncated nil)
+(load "org-phscroll.el")
 
 (evil-define-key 'normal dired-mode-map
   (kbd "h") 'dired-up-directory
@@ -37,6 +42,16 @@
 
 (global-set-key (kbd "C-c c") 'company-mode)
 
-(global-set-key (kbd "C-c d") 'treemacs)
+(global-set-key (kbd "C-c d") '+neotree/open)
+
+(global-set-key (kbd "C-c f f") 'doom/window-maximize-buffer)
+
+(global-set-key (kbd "C-c f v") 'doom/window-maximize-vertically)
+
+(global-set-key (kbd "C-c f h") 'doom/window-maximize-horizontally)
 
 (add-hook 'after-save-hook 'org-babel-tangle)
+
+(add-hook 'after-init-hook 'neotree)
+
+(add-hook 'after-init-hook 'menu-bar-mode)
