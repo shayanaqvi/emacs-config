@@ -50,6 +50,24 @@
 
 (global-set-key (kbd "C-c f h") 'doom/window-maximize-horizontally)
 
+(global-set-key (kbd "C-c m o") 'magit)
+
+(global-set-key (kbd "C-c m y") 'magit-clone)
+
+(global-set-key (kbd "C-c m l") 'magit-log)
+
+(global-set-key (kbd "C-c m i") 'magit-init)
+
+(global-set-key (kbd "C-c m p o") 'magit-push)
+
+(global-set-key (kbd "C-c m p i") 'magit-pull)
+
+(global-set-key (kbd "C-c m s 1") 'magit-stage)
+
+(global-set-key (kbd "C-c m s 2") 'magit-stage-modified)
+
+(global-set-key (kbd "C-c m c") 'magit-commit)
+
 (add-hook 'after-save-hook 'org-babel-tangle)
 
 (add-hook 'after-init-hook 'neotree)

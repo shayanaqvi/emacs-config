@@ -92,6 +92,44 @@
 #+begin_src emacs-lisp
 (global-set-key (kbd "C-c f h") 'doom/window-maximize-horizontally)
 #+end_src
+** Magit
+*** Launch Magit
+#+begin_src emacs-lisp
+(global-set-key (kbd "C-c m o") 'magit)
+#+end_src
+*** Clone
+#+begin_src emacs-lisp
+(global-set-key (kbd "C-c m y") 'magit-clone)
+#+end_src
+*** Log
+#+begin_src emacs-lisp
+(global-set-key (kbd "C-c m l") 'magit-log)
+#+end_src
+*** Initialise
+#+begin_src emacs-lisp
+(global-set-key (kbd "C-c m i") 'magit-init)
+#+end_src
+*** Push changes
+#+begin_src emacs-lisp
+(global-set-key (kbd "C-c m p o") 'magit-push)
+#+end_src
+*** Pull changes
+#+begin_src emacs-lisp
+(global-set-key (kbd "C-c m p i") 'magit-pull)
+#+end_src
+*** Stage
+**** Current file
+#+begin_src emacs-lisp
+(global-set-key (kbd "C-c m s 1") 'magit-stage)
+#+end_src
+**** All files (in directory)
+#+begin_src emacs-lisp
+(global-set-key (kbd "C-c m s 2") 'magit-stage-modified)
+#+end_src
+*** Commit changes
+#+begin_src emacs-lisp
+(global-set-key (kbd "C-c m c") 'magit-commit)
+#+end_src
 * Hooks
 ** after-save-hook
 *** org-babel-tangle
