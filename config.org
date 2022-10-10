@@ -2,36 +2,18 @@
 #+property: header-args :tangle config.el
 * Table of contents :toc:
 - [[#appearance][Appearance]]
-  - [[#fonts][Fonts]]
-  - [[#default-theme][Default theme]]
-  - [[#line-numbers][Line numbers]]
-  - [[#transparency][Transparency]]
 - [[#org-mode][Org-mode]]
-  - [[#default-org-directory][Default org directory]]
-  - [[#hide-emphasis-markers][Hide emphasis markers]]
-  - [[#phscroll][phscroll]]
 - [[#dired][Dired]]
-  - [[#keybindings][Keybindings]]
-  - [[#icons][Icons]]
-  - [[#trash-directory][Trash directory]]
 - [[#text-editing][Text Editing]]
-  - [[#use-variable-pitch-font][Use variable-pitch-font]]
-- [[#keyboard-shortcuts][Keyboard shortcuts]]
-  - [[#toggle-line-truncation][Toggle line truncation]]
-  - [[#toggle-company-mode-in-current-buffer][Toggle company-mode in current buffer]]
-  - [[#toggle-neotree][Toggle neotree]]
-  - [[#maximise-buffer][Maximise buffer]]
-  - [[#vertically-maximise-buffer][Vertically maximise buffer]]
-  - [[#horizontally-maximise-buffer][Horizontally maximise buffer]]
-  - [[#magit][Magit]]
+- [[#keyboard-shortcuts][Keyboard Shortcuts]]
 - [[#hooks][Hooks]]
-  - [[#after-save-hook][after-save-hook]]
-  - [[#after-init-hook][after-init-hook]]
+- [[#beacon-mode][beacon-mode]]
+- [[#yascroll][yascroll]]
 
 * Appearance
-** Fonts
 #+begin_src emacs-lisp
-(setq doom-font (font-spec :family "Cascadia Code" :size 17)
+;; FONTS
+(setq doom-font (font-spec :family "IBM Plex Mono" :size 17)
       doom-variable-pitch-font (font-spec :family "Fira Sans" :size 16))
 (after! doom-themes
   (setq doom-themes-enable-bold t
@@ -39,142 +21,125 @@
 (custom-set-faces!
   '(font-lock-comment-face :slant italic)
   '(font-lock-keyword-face :slant italic))
-#+end_src
 
-** Default theme
-#+begin_src emacs-lisp
-(setq doom-theme 'dark-mint)
-#+end_src
-** Line numbers
-#+begin_src emacs-lisp
+;; DEFAULT THEME
+(setq doom-theme 'doom-xcode)
+
+;; LINE NUMBERS
 (setq display-line-numbers-type 'relative)
-#+end_src
-** Transparency
-#+begin_src emacs-lisp
-(set-frame-parameter (selected-frame) 'alpha '(85 . 80))
-(add-to-list 'default-frame-alist '(alpha . (85 . 80)))
+
+;; TRANSPARENCY
+;;(set-frame-parameter (selected-frame) 'alpha '(85 . 80))
+;;(add-to-list 'default-frame-alist '(alpha . (85 . 80)))
 #+end_src
 * Org-mode
-** Default org directory
 #+begin_src emacs-lisp
+;; DEFAULT ORG DIRECTORY
 (setq org-directory "~/Documents/org")
-#+end_src
-** Hide emphasis markers
-#+begin_src emacs-lisp
+
+;; HIDDEN EMPHASIS MARKERS
 (setq org-hide-emphasis-markers t)
-#+end_src
-** phscroll
-[[https://github.com/misohena/phscroll]]
-#+begin_src emacs-lisp
-(add-to-list 'load-path "/home/shayan/.doom.d/")
+
+;; PHSCROLL
+(add-to-list 'load-path "/home/shayan/.doom.d/plugins/")
 (load "phscroll.el")
 (setq org-startup-truncated nil)
 (load "org-phscroll.el")
 #+end_src
 * Dired
-** Keybindings
 #+begin_src emacs-lisp
+;; KEYBINDINGS
 (evil-define-key 'normal dired-mode-map
   (kbd "h") 'dired-up-directory
   (kbd "l") 'dired-find-file
   (kbd "c") 'dired-do-copy
   (kbd "r") 'dired-do-rename)
-#+end_src
-** Icons
-#+begin_src emacs-lisp
+
+;; ICONS
 (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
-#+end_src
-** Trash directory
-#+begin_src emacs-lisp
+
+;; TRASH DIRECTORY
 (setq delete-by-moving-to-trash t
       trash-directory "~/.local/share/Trash/files/")
 #+end_src
 * Text Editing
-** Use variable-pitch-font
 #+begin_src emacs-lisp
+;; USE VARIABLE-PITCH-FONT
 ;;(add-hook 'text-mode-hook
-;;           (lambda ()
+;;          (lambda ()
 ;;            (variable-pitch-mode 1)))
 #+end_src
-* Keyboard shortcuts
-** Toggle line truncation
+* Keyboard Shortcuts
 #+begin_src emacs-lisp
+;; TOGGLE LINE TRUNCATION
 (global-set-key (kbd "C-c t") 'toggle-truncate-lines)
-#+end_src
-** Toggle company-mode in current buffer
-#+begin_src emacs-lisp
+
+;; TOGGLE COMPANY-MODE IN CURRENT BUFFER
 (global-set-key (kbd "C-c c") 'company-mode)
-#+end_src
-** Toggle neotree
-#+begin_src emacs-lisp
-(global-set-key (kbd "C-c d") '+neotree/open)
-#+end_src
-** Maximise buffer
-#+begin_src emacs-lisp
+
+;; TOGGLE NEOTREE
+(global-set-key (kbd "C-c d") 'neotree)
+
+;; MAXIMISE CURRENT BUFFER
 (global-set-key (kbd "C-c f f") 'doom/window-maximize-buffer)
-#+end_src
-** Vertically maximise buffer
-#+begin_src emacs-lisp
+
+;; VERTICALLY MAXIMISE CURRENT BUFFER
 (global-set-key (kbd "C-c f v") 'doom/window-maximize-vertically)
-#+end_src
-** Horizontally maximise buffer
-#+begin_src emacs-lisp
+
+;; HORIZONTALLY MAXIMISE CURRENT BUFFER
 (global-set-key (kbd "C-c f h") 'doom/window-maximize-horizontally)
-#+end_src
-** Magit
-*** Launch Magit
-#+begin_src emacs-lisp
+
+;; FLASH CURSOR AT CURRENT POSITION
+(global-set-key (kbd "C-c b") 'beacon-blink)
+
+;; MAGIT
+;;;; LAUNCH MAGIT
 (global-set-key (kbd "C-c m o") 'magit)
-#+end_src
-*** Clone
-#+begin_src emacs-lisp
+
+;;;; CLONE
 (global-set-key (kbd "C-c m y") 'magit-clone)
-#+end_src
-*** Log
-#+begin_src emacs-lisp
+
+;;;; LOG
 (global-set-key (kbd "C-c m l") 'magit-log)
-#+end_src
-*** Initialise
-#+begin_src emacs-lisp
+
+;;;; INITIALISE
 (global-set-key (kbd "C-c m i") 'magit-init)
-#+end_src
-*** Push changes
-#+begin_src emacs-lisp
+
+;;;; PUSH CHANGES
 (global-set-key (kbd "C-c m p o") 'magit-push)
-#+end_src
-*** Pull changes
-#+begin_src emacs-lisp
+
+;;;; PULL CHANGES
 (global-set-key (kbd "C-c m p i") 'magit-pull)
-#+end_src
-*** Stage
-**** Current file
-#+begin_src emacs-lisp
-(global-set-key (kbd "C-c m s 1") 'magit-stage)
-#+end_src
-**** All files (in directory)
-#+begin_src emacs-lisp
-(global-set-key (kbd "C-c m s 2") 'magit-stage-modified)
-#+end_src
-*** Commit changes
-#+begin_src emacs-lisp
+
+;;;; STAGE
+;;;;;; CURRENT FILE
+(global-set-key (kbd "C-c m s c") 'magit-stage)
+
+;;;;;; ALL MODIFIED FILES (IN CURRENT DIRECTORY)
+(global-set-key (kbd "C-c m s a") 'magit-stage-modified)
+
+;;;; COMMIT CHANGES
 (global-set-key (kbd "C-c m c") 'magit-commit)
 #+end_src
 * Hooks
-** after-save-hook
-*** org-babel-tangle
 #+begin_src emacs-lisp
+;; AFTER-SAVE-HOOK
+;;;; ORG-BABEL-TANGLE
 (add-hook 'after-save-hook 'org-babel-tangle)
-#+end_src
-** after-init-hook
-*** neotree
-#+begin_src emacs-lisp
+
+;; AFTER-INIT-HOOK (runs after initialisation)
+;;;; NEOTREE
 (add-hook 'after-init-hook 'neotree)
-#+end_src
-*** menu-bar-mode
-#+begin_src emacs-lisp
+;;;; MENU-BAR-MODE
 (add-hook 'after-init-hook 'menu-bar-mode)
+;;;; RAINBOW-MODE
+(add-hook 'after-init-hook 'rainbow-mode)
 #+end_src
-*** doom/reload-font
+* beacon-mode
 #+begin_src emacs-lisp
-(add-hook 'after-init-hook 'doom/reload-font)
+(beacon-mode 1)
+#+end_src
+* yascroll
+#+begin_src emacs-lisp
+(global-yascroll-bar-mode 1)
 #+end_src
