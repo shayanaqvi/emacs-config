@@ -1,5 +1,5 @@
-(setq doom-font (font-spec :family "Cascadia Code" :size 15)
-      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 15))
+(setq doom-font (font-spec :family "Cascadia Code" :size 17)
+      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 16))
 (after! doom-themes
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t))
@@ -7,12 +7,12 @@
   '(font-lock-comment-face :slant italic)
   '(font-lock-keyword-face :slant italic))
 
-(setq doom-theme 'poet-dark-monochrome)
+(setq doom-theme 'dark-mint)
 
 (setq display-line-numbers-type 'relative)
 
-(set-frame-parameter (selected-frame) 'alpha '(90 . 80))
-(add-to-list 'default-frame-alist '(alpha . (90 . 80)))
+(set-frame-parameter (selected-frame) 'alpha '(85 . 80))
+(add-to-list 'default-frame-alist '(alpha . (85 . 80)))
 
 (setq org-directory "~/Documents/org")
 
@@ -34,9 +34,9 @@
 (setq delete-by-moving-to-trash t
       trash-directory "~/.local/share/Trash/files/")
 
-(add-hook 'text-mode-hook
-           (lambda ()
-            (variable-pitch-mode 1)))
+;;(add-hook 'text-mode-hook
+;;           (lambda ()
+;;            (variable-pitch-mode 1)))
 
 (global-set-key (kbd "C-c t") 'toggle-truncate-lines)
 
@@ -73,3 +73,5 @@
 (add-hook 'after-init-hook 'neotree)
 
 (add-hook 'after-init-hook 'menu-bar-mode)
+
+(add-hook 'after-init-hook 'doom/reload-font)

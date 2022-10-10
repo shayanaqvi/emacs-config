@@ -1,10 +1,38 @@
 #+title: Config
 #+property: header-args :tangle config.el
+* Table of contents :toc:
+- [[#appearance][Appearance]]
+  - [[#fonts][Fonts]]
+  - [[#default-theme][Default theme]]
+  - [[#line-numbers][Line numbers]]
+  - [[#transparency][Transparency]]
+- [[#org-mode][Org-mode]]
+  - [[#default-org-directory][Default org directory]]
+  - [[#hide-emphasis-markers][Hide emphasis markers]]
+  - [[#phscroll][phscroll]]
+- [[#dired][Dired]]
+  - [[#keybindings][Keybindings]]
+  - [[#icons][Icons]]
+  - [[#trash-directory][Trash directory]]
+- [[#text-editing][Text Editing]]
+  - [[#use-variable-pitch-font][Use variable-pitch-font]]
+- [[#keyboard-shortcuts][Keyboard shortcuts]]
+  - [[#toggle-line-truncation][Toggle line truncation]]
+  - [[#toggle-company-mode-in-current-buffer][Toggle company-mode in current buffer]]
+  - [[#toggle-neotree][Toggle neotree]]
+  - [[#maximise-buffer][Maximise buffer]]
+  - [[#vertically-maximise-buffer][Vertically maximise buffer]]
+  - [[#horizontally-maximise-buffer][Horizontally maximise buffer]]
+  - [[#magit][Magit]]
+- [[#hooks][Hooks]]
+  - [[#after-save-hook][after-save-hook]]
+  - [[#after-init-hook][after-init-hook]]
+
 * Appearance
 ** Fonts
 #+begin_src emacs-lisp
-(setq doom-font (font-spec :family "Cascadia Code" :size 15)
-      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 15))
+(setq doom-font (font-spec :family "Cascadia Code" :size 17)
+      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 16))
 (after! doom-themes
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t))
@@ -12,9 +40,10 @@
   '(font-lock-comment-face :slant italic)
   '(font-lock-keyword-face :slant italic))
 #+end_src
+
 ** Default theme
 #+begin_src emacs-lisp
-(setq doom-theme 'poet-dark-monochrome)
+(setq doom-theme 'dark-mint)
 #+end_src
 ** Line numbers
 #+begin_src emacs-lisp
@@ -22,8 +51,8 @@
 #+end_src
 ** Transparency
 #+begin_src emacs-lisp
-(set-frame-parameter (selected-frame) 'alpha '(90 . 80))
-(add-to-list 'default-frame-alist '(alpha . (90 . 80)))
+(set-frame-parameter (selected-frame) 'alpha '(85 . 80))
+(add-to-list 'default-frame-alist '(alpha . (85 . 80)))
 #+end_src
 * Org-mode
 ** Default org directory
@@ -63,9 +92,9 @@
 * Text Editing
 ** Use variable-pitch-font
 #+begin_src emacs-lisp
-(add-hook 'text-mode-hook
-           (lambda ()
-            (variable-pitch-mode 1)))
+;;(add-hook 'text-mode-hook
+;;           (lambda ()
+;;            (variable-pitch-mode 1)))
 #+end_src
 * Keyboard shortcuts
 ** Toggle line truncation
@@ -144,4 +173,8 @@
 *** menu-bar-mode
 #+begin_src emacs-lisp
 (add-hook 'after-init-hook 'menu-bar-mode)
+#+end_src
+*** doom/reload-font
+#+begin_src emacs-lisp
+(add-hook 'after-init-hook 'doom/reload-font)
 #+end_src
