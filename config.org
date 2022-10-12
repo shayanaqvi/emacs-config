@@ -1,6 +1,7 @@
 #+title: Config
 #+property: header-args :tangle config.el
-* Table of contents :toc:
+
+* Table of Contents :toc:
 - [[#appearance][Appearance]]
 - [[#org-mode][Org-mode]]
 - [[#dired][Dired]]
@@ -9,6 +10,10 @@
 - [[#hooks][Hooks]]
 - [[#beacon-mode][beacon-mode]]
 - [[#yascroll][yascroll]]
+- [[#dimmer-mode][dimmer-mode]]
+- [[#all-the-icons][all-the-icons]]
+- [[#doom-modeline][doom-modeline]]
+- [[#dashboard][dashboard]]
 
 * Appearance
 #+begin_src emacs-lisp
@@ -22,16 +27,20 @@
   '(font-lock-comment-face :slant italic)
   '(font-lock-keyword-face :slant italic))
 
-;; DEFAULT THEME
-(setq doom-theme 'doom-xcode)
+; DEFAULT THEME
+(setq doom-theme 'doom-1337)
 
 ;; LINE NUMBERS
 (setq display-line-numbers-type 'relative)
 
 ;; TRANSPARENCY
-;;(set-frame-parameter (selected-frame) 'alpha '(85 . 80))
-;;(add-to-list 'default-frame-alist '(alpha . (85 . 80)))
+(set-frame-parameter (selected-frame) 'alpha '(90 . 90))
+(add-to-list 'default-frame-alist '(alpha . (90 . 90)))
 #+end_src
+
+#+RESULTS:
+: ((buffer-predicate . doom-buffer-frame-predicate) (right-divider-width . 1) (bottom-divider-width . 1) (menu-bar-lines . 1) (alpha 90 . 90) (vertical-scroll-bars) (tool-bar-lines . 0) (left-fringe . 8) (right-fringe . 8))
+
 * Org-mode
 #+begin_src emacs-lisp
 ;; DEFAULT ORG DIRECTORY
@@ -58,27 +67,34 @@
 ;; ICONS
 (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
 
+
 ;; TRASH DIRECTORY
 (setq delete-by-moving-to-trash t
       trash-directory "~/.local/share/Trash/files/")
 #+end_src
 * Text Editing
 #+begin_src emacs-lisp
-;; USE VARIABLE-PITCH-FONT
+;; FOCUS-MODE
 ;;(add-hook 'text-mode-hook
 ;;          (lambda ()
-;;            (variable-pitch-mode 1)))
+;;            (focus-mode 1)))
 #+end_src
 * Keyboard Shortcuts
 #+begin_src emacs-lisp
+;; FOCUS-MODE
+(global-set-key (kbd "C-c h") 'focus-mode)
+
 ;; TOGGLE LINE TRUNCATION
 (global-set-key (kbd "C-c t") 'toggle-truncate-lines)
 
 ;; TOGGLE COMPANY-MODE IN CURRENT BUFFER
 (global-set-key (kbd "C-c c") 'company-mode)
 
-;; TOGGLE NEOTREE
-(global-set-key (kbd "C-c d") 'neotree)
+;; TOGGLE TREEMACS
+(global-set-key (kbd "C-c d") 'treemacs)
+
+;; ENLARGEN CURRENT BUFFER
+(global-set-key (kbd "C-c f e") 'doom/window-enlargen)
 
 ;; MAXIMISE CURRENT BUFFER
 (global-set-key (kbd "C-c f f") 'doom/window-maximize-buffer)
@@ -128,8 +144,6 @@
 (add-hook 'after-save-hook 'org-babel-tangle)
 
 ;; AFTER-INIT-HOOK (runs after initialisation)
-;;;; NEOTREE
-(add-hook 'after-init-hook 'neotree)
 ;;;; MENU-BAR-MODE
 (add-hook 'after-init-hook 'menu-bar-mode)
 ;;;; RAINBOW-MODE
@@ -142,4 +156,36 @@
 * yascroll
 #+begin_src emacs-lisp
 (global-yascroll-bar-mode 1)
+#+end_src
+* dimmer-mode
+#+begin_src emacs-lisp
+(require 'dimmer)
+(dimmer-configure-which-key)
+(dimmer-configure-helm)
+(dimmer-mode t)
+#+end_src
+* all-the-icons
+#+begin_src emacs-lisp
+(require 'all-the-icons)
+#+end_src
+* doom-modeline
+#+begin_src emacs-lisp
+(setq doom-modeline-height 35)
+(setq doom-modeline-icon t)
+(setq doom-modeline-major-mode-icon t)
+(setq doom-modeline-buffer-state-icon t)
+(setq doom-modeline-time-icon t)
+(setq doom-modeline-time t)
+(setq doom-modeline-persp-icon t)
+(setq doom-modeline-major-mode-color-icon nil)
+#+end_src
+* dashboard
+#+begin_src emacs-lisp
+(require 'dashboard)
+(dashboard-setup-startup-hook)
+(setq dashboard-center-content t)
+(setq dashboard-items '((recents  . 50)))
+(setq dashboard-set-heading-icons t)
+(setq dashboard-set-file-icons t)
+(setq dashboard-set-init-info t)
 #+end_src

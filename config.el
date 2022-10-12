@@ -8,15 +8,15 @@
   '(font-lock-comment-face :slant italic)
   '(font-lock-keyword-face :slant italic))
 
-;; DEFAULT THEME
-(setq doom-theme 'doom-xcode)
+; DEFAULT THEME
+(setq doom-theme 'doom-1337)
 
 ;; LINE NUMBERS
 (setq display-line-numbers-type 'relative)
 
 ;; TRANSPARENCY
-;;(set-frame-parameter (selected-frame) 'alpha '(85 . 80))
-;;(add-to-list 'default-frame-alist '(alpha . (85 . 80)))
+(set-frame-parameter (selected-frame) 'alpha '(90 . 90))
+(add-to-list 'default-frame-alist '(alpha . (90 . 90)))
 
 ;; DEFAULT ORG DIRECTORY
 (setq org-directory "~/Documents/org")
@@ -40,14 +40,18 @@
 ;; ICONS
 (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
 
+
 ;; TRASH DIRECTORY
 (setq delete-by-moving-to-trash t
       trash-directory "~/.local/share/Trash/files/")
 
-;; USE VARIABLE-PITCH-FONT
+;; FOCUS-MODE
 ;;(add-hook 'text-mode-hook
 ;;          (lambda ()
-;;            (variable-pitch-mode 1)))
+;;            (focus-mode 1)))
+
+;; FOCUS-MODE
+(global-set-key (kbd "C-c h") 'focus-mode)
 
 ;; TOGGLE LINE TRUNCATION
 (global-set-key (kbd "C-c t") 'toggle-truncate-lines)
@@ -55,8 +59,11 @@
 ;; TOGGLE COMPANY-MODE IN CURRENT BUFFER
 (global-set-key (kbd "C-c c") 'company-mode)
 
-;; TOGGLE NEOTREE
-(global-set-key (kbd "C-c d") 'neotree)
+;; TOGGLE TREEMACS
+(global-set-key (kbd "C-c d") 'treemacs)
+
+;; ENLARGEN CURRENT BUFFER
+(global-set-key (kbd "C-c f e") 'doom/window-enlargen)
 
 ;; MAXIMISE CURRENT BUFFER
 (global-set-key (kbd "C-c f f") 'doom/window-maximize-buffer)
@@ -104,8 +111,6 @@
 (add-hook 'after-save-hook 'org-babel-tangle)
 
 ;; AFTER-INIT-HOOK (runs after initialisation)
-;;;; NEOTREE
-(add-hook 'after-init-hook 'neotree)
 ;;;; MENU-BAR-MODE
 (add-hook 'after-init-hook 'menu-bar-mode)
 ;;;; RAINBOW-MODE
@@ -114,3 +119,27 @@
 (beacon-mode 1)
 
 (global-yascroll-bar-mode 1)
+
+(require 'dimmer)
+(dimmer-configure-which-key)
+(dimmer-configure-helm)
+(dimmer-mode t)
+
+(require 'all-the-icons)
+
+(setq doom-modeline-height 35)
+(setq doom-modeline-icon t)
+(setq doom-modeline-major-mode-icon t)
+(setq doom-modeline-buffer-state-icon t)
+(setq doom-modeline-time-icon t)
+(setq doom-modeline-time t)
+(setq doom-modeline-persp-icon t)
+(setq doom-modeline-major-mode-color-icon nil)
+
+(require 'dashboard)
+(dashboard-setup-startup-hook)
+(setq dashboard-center-content t)
+(setq dashboard-items '((recents  . 50)))
+(setq dashboard-set-heading-icons t)
+(setq dashboard-set-file-icons t)
+(setq dashboard-set-init-info t)
