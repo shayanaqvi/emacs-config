@@ -18,8 +18,9 @@
 (package! stimmung-themes)
 (package! spacemacs-theme)
 
-;; ICONS FOR DIRED
+;; ICONS
 (package! all-the-icons-dired)
+(package! mode-icons)
 
 ;; AUTOTHEMER
 (package! autothemer)
@@ -35,3 +36,28 @@
 
 ;; VISUAL FEEDBACK
 (package! pulsar)
+
+;; DIMMED TEXT
+(package! focus)
+
+;; DIMMED INACTIVE BUFFERS
+(package! dimmer)
+
+;; MODELINE
+(package! telephone-line)
+(package! powerline-evil)
+
+;; UNDO-TREE
+(package! undo-tree)
+
+;; NYAN MODE
+(package! nyan-mode)
+
+;; SPEED TYPE
+(package! speed-type)
+
+;; ACADEMIC PHRASES
+(package! academic-phrases)
+
+;; DASHBOARD
+(package! dashboard)
