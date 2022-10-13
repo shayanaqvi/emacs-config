@@ -15,8 +15,8 @@
 (setq display-line-numbers-type 'relative)
 
 ;; TRANSPARENCY
-(set-frame-parameter (selected-frame) 'alpha '(90 . 90))
-(add-to-list 'default-frame-alist '(alpha . (90 . 90)))
+(set-frame-parameter (selected-frame) 'alpha '(99 . 99))
+(add-to-list 'default-frame-alist '(alpha . (99 . 99)))
 
 ;; DEFAULT ORG DIRECTORY
 (setq org-directory "~/Documents/org")
@@ -77,6 +77,9 @@
 ;; FLASH CURSOR AT CURRENT POSITION
 (global-set-key (kbd "C-c b") 'beacon-blink)
 
+;; TOGGLE RAINBOW-MODE
+(global-set-key (kbd "C-c r") 'rainbow-mode)
+
 ;; MAGIT
 ;;;; LAUNCH MAGIT
 (global-set-key (kbd "C-c m o") 'magit)
@@ -115,6 +118,8 @@
 (add-hook 'after-init-hook 'menu-bar-mode)
 ;;;; RAINBOW-MODE
 (add-hook 'after-init-hook 'rainbow-mode)
+;;;; TABS
+(add-hook 'after-init-hook 'centaur-tabs-mode)
 
 (beacon-mode 1)
 
